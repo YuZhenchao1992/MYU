@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>传统网页</title>
+  <head>
+  <body>
+    <form method="get" action="4-9.asp" target="_blank">
+      <input type="text" name="username"/>
+      <input type="submit" value="手动检测用户名"/>
+    </form>
+ </body>
+</html>
