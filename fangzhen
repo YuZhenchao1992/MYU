@@ -1,0 +1,89 @@
+clc;
+k=sqrt(-1);
+ M=25;N=4;
+ H11=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H21=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H31=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H41=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H51=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H61=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H71=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H81=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H91=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H101=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ 
+ H12=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H22=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H32=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H42=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H52=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H62=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H72=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H82=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H92=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ H102=(rand(N,M)+k*rand(N,M))/sqrt(2);
+ 
+ [u1,s1,v1]=svd([H21;H61;H71;H81;H91;H101]);
+ [u2,s2,v2]=svd([H31;H61;H71;H81;H91;H101]);
+ [u3,s3,v3]=svd([H41;H61;H71;H81;H91;H101]);
+ [u4,s4,v4]=svd([H51;H61;H71;H81;H91;H101]);
+ [u5,s5,v5]=svd([H11;H61;H71;H81;H91;H101]);
+ [u6,s6,v6]=svd([H12;H22;H32;H42;H52;H72]);
+ [u7,s7,v7]=svd([H12;H22;H32;H42;H52;H82]);
+ [u8,x8,v8]=svd([H12;H22;H32;H42;H52;H92]);
+ [u9,x9,v9]=svd([H12;H22;H32;H42;H52;H102]);
+ [u10,x10,v10]=svd([H12;H22;H32;H42;H52;H62]);
+
+f1=v1(:,M);
+f2=v2(:,M);
+f3=v3(:,M);
+f4=v4(:,M);
+f5=v5(:,M);
+f6=v6(:,M);
+f7=v7(:,M);
+f8=v8(:,M);
+f9=v9(:,M);
+f10=v10(:,M);
+
+F1=[f1 f2 f3 f4 f5];
+F2=[f6 f7 f8 f9 f10];
+
+
+S1=[1;2;3;4;5];
+S2=[6;7;8;9;10];
+
+x1=F1*S1;
+x2=F2*S2;
+
+y1=H11*x1+H12*x2;
+y2=H21*x1+H22*x2;
+y3=H31*x1+H32*x2;
+y4=H41*x1+H42*x2;
+y5=H51*x1+H52*x2; 
+y6=H62*x2+H61*x1;
+y7=H71*x1+H72*x2;
+y8=H81*x1+H82*x2;
+y9=H91*x1+H92*x2;
+y10=H101*x1+H102*x2;
+
+G1=pinv(H11*F1); 
+G2=pinv(H21*F1);
+G3=pinv(H31*F1);
+G4=pinv(H41*F1); 
+G5=pinv(H51*F1);
+G6=pinv(H62*F2);
+G7=pinv(H72*F2); 
+G8=pinv(H82*F2);
+G9=pinv(H92*F2); 
+G10=pinv(H102*F2);
+
+y1a=G1(:,:)*y1
+y2a=G2(:,:)*y2
+y3a=G3(:,:)*y3
+y4a=G4(:,:)*y4
+y5a=G5(:,:)*y5
+y6a=G6(:,:)*y6
+y7a=G7(:,:)*y7
+y8a=G8(:,:)*y8
+y9a=G9(:,:)*y9
+y10a=G10(:,:)*y10
